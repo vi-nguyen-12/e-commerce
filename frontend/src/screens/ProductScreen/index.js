@@ -2,8 +2,9 @@ import React , { useState, useEffect}from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {useParams, useHistory} from 'react-router-dom';
 import {getProductDetail} from '../../slice/productSlice'
+import {productDetailSelector} from '../../selector/productSelector';
 
-import {Button, Item, Menu, Divider, Grid, Image, Message} from 'semantic-ui-react'
+import {Button, Item, Menu, Divider, Grid, Image, Message, Select, Form} from 'semantic-ui-react'
 import {Loading} from '../../components'
 import {Wrapper} from './styled'
 import Rating from '../../components/Rating';
@@ -12,9 +13,12 @@ const ProductScreen = () => {
     const [qty,setQty]=useState(0);
     const {id} =useParams();
     const history=useHistory();
-    const {product, loading,error}=useSelector(state=>state.productDetail);
+    const {product, loading,error}=useSelector(productDetailSelector);
     const dispatch=useDispatch();
 
+    const options=[...Array(product.countInStock).keys()].map(x=>{
+        return { key: x+1, text:x+1, value: x+1}
+    })
     useEffect(()=>{
         dispatch(getProductDetail(id));
     },[dispatch,id])
@@ -22,12 +26,15 @@ const ProductScreen = () => {
     const handleClick=()=>{
         history.push('/')
     }
+
+    const onSubmit=(e)=>{
+        setQty(e.target.value)
+    }
+
+    if (loading) return <Loading/>
+    if(error) return <Message error header={error}/>
     return (
-        <>
-        {loading
-          ? (<Loading/>)
-          :error? (<Message error header={error}/>)
-          :(
+        
             <Wrapper>
                 <Grid columns={4}>
                     <Grid.Row >
@@ -58,6 +65,18 @@ const ProductScreen = () => {
                                 <div>Status: </div>
                                 <div>{product.countInStock>0? 'In Stock': 'Out Of Stock'}</div>
                             </Menu.Item>
+                            {
+                                product.countInStock>0&&
+                                (
+                                    <Menu.Item>
+                                        <Form.Select
+                                            label='Qty'
+                                            options={options}
+                                            onSubmit={onSubmit}    
+                                        />
+                                    </Menu.Item>
+                                )
+                            }
                             <Menu.Item>
                                 <Button disabled={product.countInStock===0} > ADD TO CART</Button>
                             </Menu.Item>
@@ -66,10 +85,7 @@ const ProductScreen = () => {
                     </Grid.Row>
                 </Grid>
             </Wrapper>
-          )
-        }
-        
-        </>
+     
     )
 }
 
