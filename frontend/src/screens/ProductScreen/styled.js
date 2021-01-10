@@ -22,10 +22,21 @@ export const Wrapper = styled.div`
     .ui.menu .item {
         display: flex;
         justify-content: space-between;
+
         & .ui.button {
         background-color: black;
         color:white;
+
+        & .field{
+        display:flex;
+        width:100%;
+            & .ui.selection.dropdown {
+                display:block;
+                background-color:red
+        }
     }
     }
+    }
+   
    
 `

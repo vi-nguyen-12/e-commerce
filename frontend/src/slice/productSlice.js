@@ -1,29 +1,38 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import {productsApi} from '../api/productsApi'
+import {setLoading,stopLoading} from './loadingSlice';
 
-export const getProductList=createAsyncThunk('products/getProductList',async()=>{
-    const res=await productsApi.getProducts();
-    return res
+//productList
+export const getProductList=createAsyncThunk('products/getProductList',async(_,{dispatch})=>{
+    // dispatch(setLoading());
+    try{
+        const res=await productsApi.getProducts();
+        return res
+    }
+    catch(err){
+        console.log(err)
+    }
+    // dispatch(stopLoading())
+    
 })
 export const productListSlice=createSlice({
     name:'productList',
     initialState:{products:[]},
     extraReducers:{
-        [getProductList.pending]:state=>{state.loading=true},
         [getProductList.fulfilled]:(state,{payload})=>{
-            state.loading=false
             state.products=payload
-        },
-        [getProductList.rejected]:(state,{payload})=>{
-            state.loading=false
-            state.error=payload
-        },
+        }
     }
 })
 
+//productDetail
 export const getProductDetail=createAsyncThunk('products/getProductDetail',async(id)=>{
-    const res=await productsApi.getProduct(id);
-    return res
+    try{
+        const res=await productsApi.getProduct(id);
+        return res}
+    catch(err){
+        console.log(err)
+    }
 })
 export const productDetailSlice=createSlice({
     name:'productDetail',

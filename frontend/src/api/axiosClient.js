@@ -16,7 +16,10 @@ axiosClient.interceptors.response.use(
     return res;
   },
   err => {
-    throw (err)
+    const {status}=err.response
+    if(status===500){
+      console.log('error 500')
+    }
   }
 );
 export default axiosClient;
