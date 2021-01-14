@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { productsApi } from "../api/productsApi";
-import { original } from "immer";
 
 export const addToCart = createAsyncThunk(
   "cart/cartAddItem",
@@ -31,12 +30,9 @@ export const cartSlice = createSlice({
   },
   extraReducers: {
     [addToCart.fulfilled]: (state, { payload }) => {
-      console.log(payload);
-      const exitItem = current(state.cartItems).find(
+      const exitItem = state.cartItems.find(
         (i) => i.product === payload.product
       );
-
-      console.log(exitItem);
 
       if (exitItem) {
         state.cartItems=state.cartItems.map((i) =>

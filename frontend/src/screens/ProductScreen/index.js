@@ -5,7 +5,7 @@ import {getProductDetail} from '../../slice/productSlice'
 import {productDetailSelector} from '../../selector/productSelector';
 
 import {Button, Item, Menu, Divider, Grid, Image, Message, Dropdown} from 'semantic-ui-react'
-import {Loading} from '../../components'
+// import {Loading} from '../../components'
 import {Wrapper} from './styled'
 import Rating from '../../components/Rating';
 
@@ -16,9 +16,10 @@ const ProductScreen = () => {
     const {product,error}=useSelector(productDetailSelector);
     const dispatch=useDispatch();
 
-    const options=[...Array(product?.countInStock).keys()].map(x=>{
+    const options=[...Array(product.countInStock).keys()].map(x=>{
         return { key: x+1, text:x+1, value: x+1}
     })
+    
     useEffect(()=>{
         dispatch(getProductDetail(id));
     },[dispatch,id])
@@ -73,11 +74,11 @@ const ProductScreen = () => {
                                 (
                                     <Menu.Item> 
                                         <div>Qty</div>
-                                        <Dropdown>                             
+                                        <Dropdown                      
                                             options={options}
                                             onChange={handleChange}
                                             value={qty}
-                                        </Dropdown>                          
+                                        />                          
                                     </Menu.Item>
                                 )
                             }

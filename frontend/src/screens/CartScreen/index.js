@@ -22,8 +22,7 @@ const CartScreen = () => {
     if (id) {
       dispatch(addToCart({ id, qty }));
     }
-    console.log('haha')
-  }, [dispatch]);
+  }, [dispatch,id, qty]);
 
   const handleChange=id=>(_,data)=>{
     const qty=data.value;
