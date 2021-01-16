@@ -47,7 +47,6 @@ const RegisterScreen = () => {
                     label='Name'
                     type="name"
                     name='name'
-                    id='form-input-name'
                     value={state.name}
                     placeholder='Enter name'
                     onChange={handleChange}
@@ -56,7 +55,6 @@ const RegisterScreen = () => {
                     label='Email Address'
                     type="email"
                     name='email'
-                    id='form-input-email'
                     value={state.email}
                     placeholder='Enter email'
                     onChange={handleChange}
@@ -65,7 +63,6 @@ const RegisterScreen = () => {
                     label='Password'
                     type='password'
                     name='password'
-                    id='form-input-password'
                     value={state.password}
                     placeholder='Enter password'
                     onChange={handleChange}
@@ -74,7 +71,6 @@ const RegisterScreen = () => {
                     label='Confirm Password'
                     type='password'
                     name='confirmPassword'
-                    id='form-input-confirmPassword'
                     value={state.confirmPassword}
                     placeholder='Confirm Password'
                     onChange={handleChange}
