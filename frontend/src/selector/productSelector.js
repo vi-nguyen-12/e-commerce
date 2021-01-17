@@ -1,11 +1,11 @@
 import {createSelector} from 'reselect';
 
 export const productListSelector=createSelector(
-    state=>state.productList,
-    state=>state
+    ({productList})=>productList,
+    productList=>productList
 )
 
 export const productDetailSelector=createSelector(
-    state=>state.productDetail,
-    state=>state
+    ({productDetail})=>productDetail,
+    productDetail=>productDetail
 )

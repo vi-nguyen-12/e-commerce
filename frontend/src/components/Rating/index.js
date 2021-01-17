@@ -6,12 +6,13 @@ import {Wrapper} from './styled'
 const Rating = ({value, text}) => {
     return (
         <Wrapper>
-            {[...Array(5).keys()].map(i=>{
-                if(value>=i+1)return <ImStarFull/>
-                else {
-                    if (value>=i+0.5)return <ImStarHalf/> 
-                }
-                return <ImStarEmpty/>})}
+            {[...Array(5).keys()].map((i,idx)=>{
+                return(
+                    (value>=i+1)? <ImStarFull/>:
+                    (value>=i+0.5)?<ImStarHalf/>:
+                    <ImStarEmpty/>
+                )
+            })}             
             <span> {text&& text}</span>
         </Wrapper>
     )

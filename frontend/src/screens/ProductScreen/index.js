@@ -4,21 +4,22 @@ import {useParams, useHistory} from 'react-router-dom';
 import {getProductDetail} from '../../slice/productSlice'
 import {productDetailSelector} from '../../selector/productSelector';
 
-import {Button, Item, Menu, Divider, Grid, Image, Message, Select, Form} from 'semantic-ui-react'
-import {Loading} from '../../components'
+import {Button, Item, Menu, Divider, Grid, Image, Message, Dropdown} from 'semantic-ui-react'
+// import {Loading} from '../../components'
 import {Wrapper} from './styled'
 import Rating from '../../components/Rating';
 
 const ProductScreen = () => {
-    const [qty,setQty]=useState(0);
+    const [qty,setQty]=useState(1);
     const {id} =useParams();
     const history=useHistory();
-    const {product, loading,error}=useSelector(productDetailSelector);
+    const {product,error}=useSelector(productDetailSelector);
     const dispatch=useDispatch();
 
     const options=[...Array(product.countInStock).keys()].map(x=>{
         return { key: x+1, text:x+1, value: x+1}
     })
+    
     useEffect(()=>{
         dispatch(getProductDetail(id));
     },[dispatch,id])
@@ -27,14 +28,17 @@ const ProductScreen = () => {
         history.push('/')
     }
 
-    const onSubmit=(e)=>{
-        setQty(e.target.value)
+    const handleChange=(_,data)=>{
+        setQty(data.value);
+    }
+    const handleAddToCart=()=>{
+        history.push(`/cart/${id}?qty=${qty}`)
     }
 
-    if (loading) return <Loading/>
     if(error) return <Message error header={error}/>
+
     return (
-        
+        product?
             <Wrapper>
                 <Grid columns={4}>
                     <Grid.Row >
@@ -68,24 +72,30 @@ const ProductScreen = () => {
                             {
                                 product.countInStock>0&&
                                 (
-                                    <Menu.Item>
-                                        <Form.Select
-                                            label='Qty'
+                                    <Menu.Item> 
+                                        <div>Qty</div>
+                                        <Dropdown                      
                                             options={options}
-                                            onSubmit={onSubmit}    
-                                        />
+                                            onChange={handleChange}
+                                            value={qty}
+                                        />                          
                                     </Menu.Item>
                                 )
                             }
                             <Menu.Item>
-                                <Button disabled={product.countInStock===0} > ADD TO CART</Button>
+                                <Button 
+                                    disabled={product.countInStock===0}
+                                    onClick={handleAddToCart}
+                                > 
+                                    ADD TO CART
+                                </Button>
                             </Menu.Item>
                         </Menu>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
             </Wrapper>
-     
+            :null
     )
 }
 
