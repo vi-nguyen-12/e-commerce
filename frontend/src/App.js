@@ -8,6 +8,8 @@ import {
   RegisterScreen, 
   ProfileScreen,
   ShippingScreen,
+  PaymentScreen,
+  PlaceOrderScreen
 } from './screens'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GlobalStyle from './GlobalStyle'
@@ -23,6 +25,8 @@ const App = () => {
         <Route path='/register' component= {RegisterScreen}/>
         <Route path='/profile' component= {ProfileScreen}/>
         <Route path='/shipping' component= {ShippingScreen}/>
+        <Route path='/payment' component= {PaymentScreen}/>
+        <Route path='/placeorder' component= {PlaceOrderScreen}/>
         <Route path='/product/:id' component={ProductScreen}/>
         <Route path='/cart/:id?' component= {CartScreen}/>
         <Route exact path='/' component={HomeScreen}/>

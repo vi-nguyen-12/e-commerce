@@ -9,8 +9,9 @@ import {
     userLoginSlice,
     userRegisterSlice, 
     userDetailsSlice,
-    userUpdateProfileSlice
+    userUpdateProfileSlice,
 } from './slice/userSlice';
+import {orderCreateSlice} from './slice/orderSlice'
 
 const store=configureStore({
     reducer:{
@@ -22,7 +23,9 @@ const store=configureStore({
         userLogin:userLoginSlice.reducer,
         userRegister: userRegisterSlice.reducer,
         userDetails:userDetailsSlice.reducer,
-        userUpdateProfile:userUpdateProfileSlice.reducer
+        userUpdateProfile:userUpdateProfileSlice.reducer,
+        
+        orderCreate: orderCreateSlice.reducer
     }
 })
 

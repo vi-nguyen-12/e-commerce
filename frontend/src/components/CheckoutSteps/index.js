@@ -1,6 +1,7 @@
 import React from 'react';
 import {Step} from 'semantic-ui-react';
 import {useHistory} from 'react-router-dom';
+import {Wrapper} from './styled'
 
 const CheckoutSteps = ({step1,step2,step3,step4}) => {
     const history = useHistory();
@@ -9,7 +10,7 @@ const CheckoutSteps = ({step1,step2,step3,step4}) => {
         history.push(`/${name}`)
     }
     return (
-        <div>
+        <Wrapper>
             <Step.Group widths={4} size='tiny'>
                 <Step 
                     active={step1} 
@@ -48,7 +49,7 @@ const CheckoutSteps = ({step1,step2,step3,step4}) => {
                     Place Order
                 </Step>
             </Step.Group>
-        </div>
+        </Wrapper>
     )
 }
 

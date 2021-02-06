@@ -40,55 +40,49 @@ const CartScreen = () => {
 
   return (
     <Wrapper>
-    <Header as='h3'>SHOPPING CART</Header>
-    <Container className='wrap'>
-      <Container className="items">
-      {cartItems.map(item=>(
-         <Grid >
-             <Grid.Row columns={5}>
-                <Grid.Column width={4}>
-                    <Image src={item.image} />
-                </Grid.Column>
-                <Grid.Column width={4}>
-                    <Item.Header>{item.name}</Item.Header>
-                </Grid.Column> 
-                <Grid.Column width={3}>
-                    <Item.Meta>${item.price}</Item.Meta>
-                </Grid.Column > 
-                <Grid.Column width={3}>
-                    <Dropdown
-                        fluid
-                        selection
-                        onChange={handleChange(item.product)}
-                        options={
-                            [...Array(item.countInStock).keys()].map(x=>{
-                            return { key: x+1, text:x+1, value: x+1}})}
-                        value={item.qty}
-                    />
-                </Grid.Column> 
-                <Grid.Column width={2}>
-                    <Button onClick={handleRemove(item.product)}>
-                      <BsTrash/>
-                    </Button>
-                </Grid.Column> 
-             </Grid.Row>
-         </Grid>
-     ))}
-      </Container>
-      {/* <Container className="total"> */}
-        <Menu  vertical compact>
-              <Menu.Item>
-                <Header as='h4'>SUBTOTAL ({totalItems}) ITEMS </Header>
-                <Header as='h5'>${subTotalPrice}</Header>
-              </Menu.Item>
-              <Menu.Item>
-                <Button onClick={handleCheckout} disabled={cartItems.length===0}>PROCEED TO CHECKOUT</Button>
-              </Menu.Item>
-        </Menu>
-      {/* </Container> */}
-    </Container>
-    
-     
+        <Grid>
+          <Grid.Row>
+            <Header as='h3'>SHOPPING CART</Header>
+          </Grid.Row>
+          {cartItems.map(item=>(
+          <Grid.Row columns={5}>
+          <Grid.Column width={4}>
+              <Image src={item.image} />
+          </Grid.Column>
+          <Grid.Column width={4}>
+              <Item.Header>{item.name}</Item.Header>
+          </Grid.Column> 
+          <Grid.Column width={3}>
+              <Item.Meta>${item.price}</Item.Meta>
+          </Grid.Column > 
+          <Grid.Column width={3}>
+              <Dropdown
+                  fluid
+                  selection
+                  onChange={handleChange(item.product)}
+                  options={
+                      [...Array(item.countInStock).keys()].map(x=>{
+                      return { key: x+1, text:x+1, value: x+1}})}
+                  value={item.qty}
+              />
+          </Grid.Column> 
+          <Grid.Column width={2}>
+              <Button onClick={handleRemove(item.product)}>
+                <BsTrash/>
+              </Button>
+          </Grid.Column> 
+        </Grid.Row>
+        ))}
+        </Grid>
+      <Menu  vertical compact>
+            <Menu.Item>
+              <Header as='h4'>SUBTOTAL ({totalItems}) ITEMS </Header>
+              <Header as='h5'>${subTotalPrice}</Header>
+            </Menu.Item>
+            <Menu.Item>
+              <Button onClick={handleCheckout} disabled={cartItems.length===0}>PROCEED TO CHECKOUT</Button>
+            </Menu.Item>
+      </Menu>
     </Wrapper>);
 };
 

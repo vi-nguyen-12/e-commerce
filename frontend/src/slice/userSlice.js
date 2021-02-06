@@ -4,9 +4,9 @@ import {usersApi} from '../api/usersApi';
 //register
 export const register=createAsyncThunk(
     'users/register',
-    async({name,email,password})=>{
+    async(data)=>{
         try{
-            const response=await usersApi.register({name,email,password});
+            const response=await usersApi.register(data);
             localStorage.setItem('userInfo',JSON.stringify(response));
             return {response}
         }
@@ -33,8 +33,7 @@ export const login=createAsyncThunk(
     'users/login',
     async(data)=>{
         try{
-            const {email,password} = data;
-            const response=await usersApi.login({email,password});
+            const response=await usersApi.login(data);
             localStorage.setItem('userInfo',JSON.stringify(response));
             return {response}
         }
