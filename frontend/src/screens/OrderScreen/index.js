@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { CheckoutSteps } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import {
   Grid,
   List,
@@ -9,78 +8,76 @@ import {
   Container,
   Image,
   Menu,
-  Button,
   Message,
 } from "semantic-ui-react";
+import { Loading } from "../../components";
 import { Wrapper } from "./styled";
-import { cartSelector } from "../../selector/cartSelector";
-import { orderCreateSelector } from "../../selector/orderSelector";
-import { createOrder } from "../../slice/orderSlice";
+import { orderDetailsSelector } from "../../selector/orderSelector";
+import { getOrderDetails } from "../../slice/orderSlice";
 
-const PlaceOrderScreen = () => {
-  const { cartItems, shippingAddress, paymentMethod } = useSelector(
-    cartSelector
-  );
-  const { order, success, error } = useSelector(orderCreateSelector);
+const OrderScreen = () => {
+  let { loading, order, error } = useSelector(orderDetailsSelector);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
 
   const addDecimal = (number) => {
     return (Math.round(number * 100) / 100).toFixed(2);
-  }; //return a String
-
-  const itemsPrice = cartItems.reduce(
-    (total, i) => (total += i.price * i.qty),
-    0
-  );
-  const shippingPrice = itemsPrice > 100 ? 0 : 100;
-  const taxPrice = itemsPrice * 0.15;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
-  useEffect(() => {
-    if (success) {
-      history.push(`order/${order._id}`);
-    }
-  }, [history, success]);
-  const handlePlaceOrder = () => {
-    dispatch(
-      createOrder({
-        orderItems: cartItems,
-        shippingAddress,
-        paymentMethod,
-        itemsPrice,
-        shippingPrice,
-        taxPrice,
-        totalPrice,
-      })
-    );
   };
+  useEffect(() => {
+    if (!order || order._id !== id) {
+      dispatch(getOrderDetails(id));
+    }
+  }, [order, id]);
 
+  if (loading) return <Loading />;
+  if (error) return <Message error header={error} />;
   return (
     <Wrapper>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <Container>
+        <Header> ORDER: {order._id}</Header>
+      </Container>
       <Container>
         <List divided relaxed className="info">
           <List.Item>
             <Header>SHIPPING</Header>
+            <p>Name: {order.user.name}</p>
             <p>
-              Address: {shippingAddress.address} {shippingAddress.city}{" "}
-              {shippingAddress.postalCode} {shippingAddress.country}
+              Email:{" "}
+              <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
             </p>
+            <p>
+              Address: {order.shippingAddress.address}{" "}
+              {order.shippingAddress.city} {order.shippingAddress.postalCode}{" "}
+              {order.shippingAddress.country}
+            </p>
+            {order.isDelivered ? (
+              <Message
+                positive
+                content={`Order delivered at ${order.deliveredAt}`}
+              />
+            ) : (
+              <Message negative content="Not Delivered" />
+            )}
           </List.Item>
           <List.Item>
             <Header>PAYMENT METHOD</Header>
-            <p>Method: {paymentMethod}</p>
+            <p>Method: {order.paymentMethod}</p>
+            {order.paidAt ? (
+              <Message positive content={`Order paid at ${order.paidAt}`} />
+            ) : (
+              <Message negative content="Not Paid" />
+            )}
           </List.Item>
           <List.Item>
             <Header>ORDER ITEMS</Header>
-            {cartItems.length === 0 ? (
+            {order.orderItems.length === 0 ? (
               <Message content="Your Cart is Empty" />
             ) : (
               <Container>
                 <List divided relaxed>
-                  {cartItems.map((item) => (
-                    <List.Item>
+                  {order.orderItems.map((item, id) => (
+                    <List.Item key={id}>
                       <Grid columns={3}>
                         <Grid.Column width={3}>
                           <Image src={item.image} rounded />
@@ -108,28 +105,25 @@ const PlaceOrderScreen = () => {
           </Menu.Item>
           <Menu.Item>
             <div>Items </div>
-            <div>{addDecimal(itemsPrice)}</div>
+            <div>{addDecimal(order.itemsPrice)}</div>
           </Menu.Item>
           <Menu.Item>
             <div>Shipping </div>
-            <div>{addDecimal(shippingPrice)}</div>
+            <div>{addDecimal(order.shippingPrice)}</div>
           </Menu.Item>
           <Menu.Item>
             <div>Tax </div>
-            <div>{addDecimal(taxPrice)}</div>
+            <div>{addDecimal(order.taxPrice)}</div>
           </Menu.Item>
           <Menu.Item>
             <div>Total </div>
-            <div>{addDecimal(totalPrice)}</div>
+            <div>{addDecimal(order.totalPrice)}</div>
           </Menu.Item>
-          <Menu.Item>{error && <Message negative content={error} />}</Menu.Item>
-          <Menu.Item>
-            <Button onClick={handlePlaceOrder}>PLACE ORDER</Button>
-          </Menu.Item>
+          {error && <Message negative content={error} />}
         </Menu>
       </Container>
     </Wrapper>
   );
 };
 
-export default PlaceOrderScreen;
+export default OrderScreen;

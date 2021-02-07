@@ -1,37 +1,38 @@
 import React from "react";
-import {Heading, Loading} from "./components";
+import { Heading, Loading } from "./components";
 import {
-  HomeScreen, 
-  ProductScreen, 
+  HomeScreen,
+  ProductScreen,
   CartScreen,
-  LoginScreen, 
-  RegisterScreen, 
+  LoginScreen,
+  RegisterScreen,
   ProfileScreen,
   ShippingScreen,
   PaymentScreen,
-  PlaceOrderScreen
-} from './screens'
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import GlobalStyle from './GlobalStyle'
+  PlaceOrderScreen,
+  OrderScreen,
+} from "./screens";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import GlobalStyle from "./GlobalStyle";
 
 const App = () => {
   return (
     <Router>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Heading />
-      <Loading/>
+      <Loading />
       <Switch>
-        <Route path='/login' component= {LoginScreen}/>
-        <Route path='/register' component= {RegisterScreen}/>
-        <Route path='/profile' component= {ProfileScreen}/>
-        <Route path='/shipping' component= {ShippingScreen}/>
-        <Route path='/payment' component= {PaymentScreen}/>
-        <Route path='/placeorder' component= {PlaceOrderScreen}/>
-        <Route path='/product/:id' component={ProductScreen}/>
-        <Route path='/cart/:id?' component= {CartScreen}/>
-        <Route exact path='/' component={HomeScreen}/>
+        <Route path="/login" component={LoginScreen} />
+        <Route path="/register" component={RegisterScreen} />
+        <Route path="/profile" component={ProfileScreen} />
+        <Route path="/shipping" component={ShippingScreen} />
+        <Route path="/payment" component={PaymentScreen} />
+        <Route path="/placeorder" component={PlaceOrderScreen} />
+        <Route path="/order/:id" component={OrderScreen} />
+        <Route path="/product/:id" component={ProductScreen} />
+        <Route path="/cart/:id?" component={CartScreen} />
+        <Route exact path="/" component={HomeScreen} />
       </Switch>
-     
     </Router>
   );
 };
