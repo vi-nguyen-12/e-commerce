@@ -7,4 +7,7 @@ export const ordersApi = {
   getOrderDetail: (id) => {
     return axiosClient.get(`/api/orders/${id}`);
   },
+  payOrder: (orderId, paymentResult) => {
+    return axiosClient.put(`/api/orders/${orderId}/pay`, paymentResult);
+  },
 };
