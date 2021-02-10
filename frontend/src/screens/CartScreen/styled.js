@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    padding: 10px 30px;
-    .ui.header {
-        font-weight:350
+    display: flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:30px;
+    .ui.grid{
+        width:800px;
+        padding-right: 20px;
     }
-    .wrap{
-       display: flex;
-       align-items:flex-start
-   }
-    .items {
-        width: 500px;
+    .ui.header {
+        font-weight:350;
     }
     .ui.button{
         background-color:transparent

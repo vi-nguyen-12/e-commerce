@@ -5,11 +5,13 @@ import {Header, Form, Button} from 'semantic-ui-react'
 import {saveShippingAddress} from '../../slice/cartSlice'
 import {Wrapper} from './styled'
 import {cartSelector} from '../../selector/cartSelector';
+import {userLoginSelector} from '../../selector/userSelector';
 import CheckoutSteps from '../../components/CheckoutSteps'
 
 const ShippingScreen = () => {
     const dispatch=useDispatch();
     const {shippingAddress}=useSelector(cartSelector);
+    const {userInfo} =useSelector(userLoginSelector);
 
     const [state,setState] = useState({
         address:shippingAddress.address,
@@ -17,11 +19,16 @@ const ShippingScreen = () => {
         postalCode:shippingAddress.postalCode,
         country:shippingAddress.country,
     })
+    const history=useHistory();
+
+    if(!userInfo){
+        history.push('/login')
+    }
  
     const handleChange=e=>{
         setState({...state,[e.target.name]:e.target.value})
     }
-    const history=useHistory();
+
 
     const handleSubmit=(e)=>{
         e.preventDefault();
