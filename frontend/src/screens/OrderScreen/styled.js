@@ -23,4 +23,7 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
   }
+  #buttons-container {
+    margin: 10px;
+  }
 `;
