@@ -11,6 +11,7 @@ import {
   PaymentScreen,
   PlaceOrderScreen,
   OrderScreen,
+  UserListScreen,
 } from "./screens";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/order/:id" component={OrderScreen} />
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
+        <Route path="/userlist" component={UserListScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
     </Router>

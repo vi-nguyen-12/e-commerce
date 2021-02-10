@@ -8,6 +8,7 @@ import ShippingScreen from "./ShippingScreen";
 import PaymentScreen from "./PaymentScreen";
 import PlaceOrderScreen from "./PlaceOrderScreen";
 import OrderScreen from "./OrderScreen";
+import UserListScreen from "./UserListScreen";
 
 export {
   HomeScreen,
@@ -20,4 +21,5 @@ export {
   PaymentScreen,
   PlaceOrderScreen,
   OrderScreen,
+  UserListScreen,
 };
