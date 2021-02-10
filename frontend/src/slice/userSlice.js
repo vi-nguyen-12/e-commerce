@@ -140,3 +140,33 @@ export const userUpdateProfileSlice = createSlice({
     },
   },
 });
+
+// get list of users
+export const listUsers = createAsyncThunk("users/listUsers", async () => {
+  try {
+    const response = await usersApi.listUsers();
+    return { response };
+  } catch (err) {
+    const error =
+      err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message;
+    return { error };
+  }
+});
+export const userListSlice = createSlice({
+  name: "userList",
+  initialState: { users: [] },
+  extraReducers: {
+    [listUsers.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.users = payload.response;
+      } else {
+        state.error = payload.error;
+      }
+    },
+    [logout]: (state) => {
+      state.users = [];
+    },
+  },
+});
