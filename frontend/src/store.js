@@ -8,7 +8,12 @@ import {
   userDetailsSlice,
   userUpdateProfileSlice,
 } from "./slice/userSlice";
-import { orderCreateSlice, orderDetailsSlice } from "./slice/orderSlice";
+import {
+  orderCreateSlice,
+  orderDetailsSlice,
+  orderPaySlice,
+  myOrderListSlice,
+} from "./slice/orderSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +29,8 @@ const store = configureStore({
 
     orderCreate: orderCreateSlice.reducer,
     orderDetails: orderDetailsSlice.reducer,
+    orderPay: orderPaySlice.reducer,
+    myOrderList: myOrderListSlice.reducer,
   },
 });
 
