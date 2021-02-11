@@ -27,7 +27,7 @@ const UserListScreen = () => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, successDelete]);
+  }, [dispatch, history, successDelete, userInfo]);
 
   const handleDelete = (id) => () => {
     if (window.confirm("Are you sure? ")) {
@@ -68,7 +68,7 @@ const UserListScreen = () => {
                     <Button
                       size="small"
                       onClick={() => {
-                        history.push(`/user/${user._id}/edit`);
+                        history.push(`/admin/user/${user._id}/edit`);
                       }}
                     >
                       {" "}
