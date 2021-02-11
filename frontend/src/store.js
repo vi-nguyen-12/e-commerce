@@ -8,6 +8,7 @@ import {
   userDetailsSlice,
   userUpdateProfileSlice,
   userListSlice,
+  userDeleteSlice,
 } from "./slice/userSlice";
 import {
   orderCreateSlice,
@@ -33,6 +34,7 @@ const store = configureStore({
     orderPay: orderPaySlice.reducer,
     myOrderList: myOrderListSlice.reducer,
     userList: userListSlice.reducer,
+    userDelete: userDeleteSlice.reducer,
   },
 });
 

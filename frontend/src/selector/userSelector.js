@@ -19,3 +19,7 @@ export const userListSelector = createSelector(
   ({ userList }) => userList,
   (userList) => userList
 );
+export const userDeleteSelector = createSelector(
+  ({ userDelete }) => userDelete,
+  (userDelete) => userDelete
+);
