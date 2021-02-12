@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
-import { productListSelector } from "../../selector/productSelector";
+import {
+  productListSelector,
+  productDeleteSelector,
+} from "../../selector/productSelector";
 import { userLoginSelector } from "../../selector/userSelector";
-import { getProductList } from "../../slice/productSlice";
+import { getProductList, deleteProduct } from "../../slice/productSlice";
 import { Wrapper } from "./styled";
 import { Message, Header, Button, Table, Container } from "semantic-ui-react";
 import { FiEdit } from "react-icons/fi";
@@ -15,6 +18,9 @@ const ProductListScreen = () => {
   const dispatch = useDispatch();
   const { products, error } = useSelector(productListSelector);
   const { userInfo } = useSelector(userLoginSelector);
+  const { success: successDelete, error: errorDelete } = useSelector(
+    productDeleteSelector
+  );
 
   const history = useHistory();
   useEffect(() => {
@@ -23,13 +29,14 @@ const ProductListScreen = () => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const handleDelete = (id) => () => {
-    // if (window.confirm("Are you sure? ")) {
-    //   dispatch(deleteUser(id));
-    // }
+    if (window.confirm("Are you sure? ")) {
+      dispatch(deleteProduct(id));
+    }
   };
+  if (errorDelete) return <Message negative content={errorDelete} />;
   if (error) return <Message negative content={error} />;
   return (
     <Wrapper>
