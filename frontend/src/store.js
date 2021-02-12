@@ -1,5 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productListSlice, productDetailSlice } from "./slice/productSlice";
+import {
+  productListSlice,
+  productDetailSlice,
+  productDeleteSlice,
+} from "./slice/productSlice";
 import { cartSlice } from "./slice/cartSlice";
 import { loadingSlice } from "./slice/loadingSlice";
 import {
@@ -23,6 +27,7 @@ const store = configureStore({
     loading: loadingSlice.reducer,
     productList: productListSlice.reducer,
     productDetail: productDetailSlice.reducer,
+    productDelete: productDeleteSlice.reducer,
     cart: cartSlice.reducer,
 
     userLogin: userLoginSlice.reducer,
