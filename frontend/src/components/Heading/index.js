@@ -44,13 +44,13 @@ const Heading = () => {
           {userInfo && userInfo.isAdmin && (
             <Dropdown item text="ADMIN">
               <Dropdown.Menu>
-                <Dropdown.Item onClick={handleClick("userlist")}>
+                <Dropdown.Item onClick={handleClick("admin/userlist")}>
                   Users
                 </Dropdown.Item>
-                <Dropdown.Item onClick={handleClick("productlist")}>
+                <Dropdown.Item onClick={handleClick("admin/productlist")}>
                   Products
                 </Dropdown.Item>
-                <Dropdown.Item onClick={handleClick("orderlist")}>
+                <Dropdown.Item onClick={handleClick("admin/orderlist")}>
                   Orders
                 </Dropdown.Item>
               </Dropdown.Menu>
