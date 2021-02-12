@@ -23,3 +23,7 @@ export const userDeleteSelector = createSelector(
   ({ userDelete }) => userDelete,
   (userDelete) => userDelete
 );
+export const userUpdateSelector = createSelector(
+  ({ userUpdate }) => userUpdate,
+  (userUpdate) => userUpdate
+);
