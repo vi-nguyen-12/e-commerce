@@ -9,6 +9,7 @@ import {
   userUpdateProfileSlice,
   userListSlice,
   userDeleteSlice,
+  userUpdateSlice,
 } from "./slice/userSlice";
 import {
   orderCreateSlice,
@@ -35,6 +36,7 @@ const store = configureStore({
     myOrderList: myOrderListSlice.reducer,
     userList: userListSlice.reducer,
     userDelete: userDeleteSlice.reducer,
+    userUpdate: userUpdateSlice.reducer,
   },
 });
 
