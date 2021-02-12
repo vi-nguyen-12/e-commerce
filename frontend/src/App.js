@@ -13,6 +13,7 @@ import {
   OrderScreen,
   UserListScreen,
   UserEditScreen,
+  ProductListScreen,
 } from "./screens";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/product/:id" component={ProductScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
         <Route path="/admin/userlist" component={UserListScreen} />
+        <Route path="/admin/productlist" component={ProductListScreen} />
         <Route path="/admin/user/:id/edit" component={UserEditScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
