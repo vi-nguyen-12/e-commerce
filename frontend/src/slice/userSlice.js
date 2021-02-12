@@ -95,7 +95,6 @@ export const userDetailsSlice = createSlice({
   initialState: { user: {} },
   extraReducers: {
     [getUserDetails.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       if ("response" in payload) {
         state.user = payload.response;
       } else {
@@ -196,3 +195,38 @@ export const userDeleteSlice = createSlice({
     },
   },
 });
+
+// update user
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async (user, { dispatch }) => {
+    try {
+      const response = await usersApi.updateUser(user);
+      dispatch(getUserDetails(user._id));
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+export const userUpdateSlice = createSlice({
+  name: "userUpdate",
+  initialState: {},
+  reducers: {
+    resetUpdate: (state) => (state = {}),
+  },
+  extraReducers: {
+    [updateUser.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+export const { resetUpdate } = userUpdateSlice.actions;
