@@ -64,3 +64,35 @@ export const productDeleteSlice = createSlice({
     },
   },
 });
+
+// create product
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async () => {
+    try {
+      const response = await productsApi.createProduct();
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  }
+);
+export const productCreateSlice = createSlice({
+  name: "productCreate",
+  initialState: {},
+  reducers: {
+    resetProduct: (state) => {
+      state = {};
+    },
+  },
+  extraReducers: {
+    [createProduct.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+        state.product = payload.response;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
