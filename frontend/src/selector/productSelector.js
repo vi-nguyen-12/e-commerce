@@ -14,3 +14,7 @@ export const productDeleteSelector = createSelector(
   ({ productDelete }) => productDelete,
   (productDelete) => productDelete
 );
+export const productCreateSelector = createSelector(
+  ({ productCreate }) => productCreate,
+  (productCreate) => productCreate
+);
