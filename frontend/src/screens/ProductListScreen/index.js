@@ -7,7 +7,12 @@ import {
   productDeleteSelector,
 } from "../../selector/productSelector";
 import { userLoginSelector } from "../../selector/userSelector";
-import { getProductList, deleteProduct } from "../../slice/productSlice";
+import {
+  getProductList,
+  deleteProduct,
+  createProduct,
+  resetProduct,
+} from "../../slice/productSlice";
 import { Wrapper } from "./styled";
 import { Message, Header, Button, Table, Container } from "semantic-ui-react";
 import { FiEdit } from "react-icons/fi";
