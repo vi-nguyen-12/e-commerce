@@ -5,6 +5,7 @@ import { Grid } from "semantic-ui-react";
 import {
   productListSelector,
   productDeleteSelector,
+  productCreateSelector,
 } from "../../selector/productSelector";
 import { userLoginSelector } from "../../selector/userSelector";
 import {
@@ -26,22 +27,32 @@ const ProductListScreen = () => {
   const { success: successDelete, error: errorDelete } = useSelector(
     productDeleteSelector
   );
+  const { success: successCreate, error: errorCreate } = useSelector(
+    productCreateSelector
+  );
 
   const history = useHistory();
   useEffect(() => {
+    dispatch(resetProduct());
     if (userInfo && userInfo.isAdmin) {
       dispatch(getProductList());
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo, successDelete]);
+  }, [dispatch, history, userInfo, successDelete, successCreate]);
 
   const handleDelete = (id) => () => {
     if (window.confirm("Are you sure? ")) {
       dispatch(deleteProduct(id));
     }
   };
+
+  const handleCreate = () => {
+    dispatch(createProduct());
+  };
+
   if (errorDelete) return <Message negative content={errorDelete} />;
+  if (errorCreate) return <Message negative content={errorCreate} />;
   if (error) return <Message negative content={error} />;
   return (
     <Wrapper>
@@ -49,7 +60,7 @@ const ProductListScreen = () => {
         <Grid.Column width={14}>
           <Container>
             <Header as="h3"> PRODUCTS</Header>
-            <Button className="create-btn" size="tiny">
+            <Button className="create-btn" size="tiny" onClick={handleCreate}>
               <AiOutlinePlus /> CREATE PRODUCT{" "}
             </Button>
           </Container>
