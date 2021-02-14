@@ -77,6 +77,7 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
+
 export const productCreateSlice = createSlice({
   name: "productCreate",
   initialState: {},
@@ -96,4 +97,5 @@ export const productCreateSlice = createSlice({
     },
   },
 });
+
 export const { resetProduct } = productCreateSlice.actions;
