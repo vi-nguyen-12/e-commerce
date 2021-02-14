@@ -10,6 +10,6 @@ export const productsApi = {
     return axiosClient.delete(`/api/products/${id}`);
   },
   createProduct: () => {
-    return axiosClient.post("api/products");
+    return axiosClient.post("/api/products");
   },
 };
