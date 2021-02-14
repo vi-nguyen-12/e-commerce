@@ -96,3 +96,4 @@ export const productCreateSlice = createSlice({
     },
   },
 });
+export const { resetProduct } = productCreateSlice.actions;
