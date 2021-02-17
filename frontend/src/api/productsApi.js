@@ -12,4 +12,7 @@ export const productsApi = {
   createProduct: () => {
     return axiosClient.post("/api/products");
   },
+  updateProduct: (product) => {
+    return axiosClient.put(`/api/products/${product._id}`, product);
+  },
 };
