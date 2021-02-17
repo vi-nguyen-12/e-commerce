@@ -4,6 +4,7 @@ import {
   productDetailSlice,
   productDeleteSlice,
   productCreateSlice,
+  productUpdateSlice,
 } from "./slice/productSlice";
 import { cartSlice } from "./slice/cartSlice";
 import { loadingSlice } from "./slice/loadingSlice";
@@ -30,6 +31,7 @@ const store = configureStore({
     productDetail: productDetailSlice.reducer,
     productDelete: productDeleteSlice.reducer,
     productCreate: productCreateSlice.reducer,
+    productUpdate: productUpdateSlice.reducer,
     cart: cartSlice.reducer,
 
     userLogin: userLoginSlice.reducer,
