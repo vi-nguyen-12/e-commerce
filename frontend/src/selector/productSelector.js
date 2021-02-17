@@ -18,3 +18,7 @@ export const productCreateSelector = createSelector(
   ({ productCreate }) => productCreate,
   (productCreate) => productCreate
 );
+export const productUpdateSelector = createSelector(
+  ({ productUpdate }) => productUpdate,
+  (productUpdate) => productUpdate
+);
