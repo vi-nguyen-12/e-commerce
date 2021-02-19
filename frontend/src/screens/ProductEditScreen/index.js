@@ -19,6 +19,8 @@ import {
   productDetailSelector,
   productUpdateSelector,
 } from "../../selector/productSelector";
+import axios from "axios";
+import { Loading } from "../../components";
 
 const ProductEditScreen = () => {
   const dispatch = useDispatch();
@@ -29,13 +31,14 @@ const ProductEditScreen = () => {
   const [state, setState] = useState({
     name: "",
     price: "",
-    image: false,
+    image: "",
     brand: "",
     countInStock: 0,
     category: "",
     description: "",
     numReviews: 0,
   });
+  const [uploading, setUploading] = useState(false);
 
   const history = useHistory();
   const { id } = useParams();
@@ -70,6 +73,27 @@ const ProductEditScreen = () => {
     e.preventDefault();
     dispatch(updateProduct({ _id: id, ...state }));
   };
+  const handleUploadFile = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/upload", formData, config);
+
+      setState((state) => ({ ...state, image: data }));
+      setUploading(false);
+    } catch (err) {
+      console.error(err);
+      setUploading(false);
+    }
+  };
 
   return (
     <Wrapper>
@@ -88,15 +112,16 @@ const ProductEditScreen = () => {
         <Form>
           <Form.Input
             label="Name"
-            type="name"
+            type="text"
             name="name"
             value={state.name}
             placeholder="Enter name"
             onChange={handleChange}
           />
+
           <Form.Input
             label="Price"
-            type="price"
+            type="text"
             name="price"
             value={state.price}
             placeholder="Enter price"
@@ -104,15 +129,31 @@ const ProductEditScreen = () => {
           />
           <Form.Input
             label="Image"
-            type="image"
+            type="text"
             name="image"
             value={state.image}
-            placeholder="Enter image"
+            placeholder="Enter image url"
             onChange={handleChange}
           />
+          <Form>
+            <Form.Field>
+              <Button as="label" htmlFor="file" type="button">
+                {" "}
+                Choose File
+              </Button>
+              <input
+                type="file"
+                id="file"
+                hidden
+                multiple
+                onChange={handleUploadFile}
+              />
+            </Form.Field>
+          </Form>
+          {uploading && <Loading />}
           <Form.Input
             label="Brand"
-            type="brand"
+            type="text"
             name="brand"
             value={state.brand}
             placeholder="Enter brand"
@@ -120,7 +161,7 @@ const ProductEditScreen = () => {
           />
           <Form.Input
             label="Count In Stock"
-            type="countInStock"
+            type="text"
             name="countInStock"
             value={state.countInStock}
             placeholder="Enter countInStock"
@@ -128,7 +169,7 @@ const ProductEditScreen = () => {
           />
           <Form.Input
             label="Category"
-            type="category"
+            type="text"
             name="category"
             value={state.category}
             placeholder="Enter category"
@@ -136,7 +177,7 @@ const ProductEditScreen = () => {
           />
           <Form.Input
             label="Description"
-            type="description"
+            type="text"
             name="description"
             value={state.description}
             placeholder="Enter description"
@@ -144,7 +185,7 @@ const ProductEditScreen = () => {
           />
           <Form.Input
             label="Number of Reviews"
-            type="numReviews"
+            type="text"
             name="numReviews"
             value={state.numReviews}
             placeholder="Enter number of reviews"
