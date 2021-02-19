@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, "uploads/");
   },
-  filename(rew, file, cb) {
+  filename(req, file, cb) {
     cb(
       null,
       `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
@@ -26,7 +26,7 @@ function checkFileType(file, cb) {
     cb("Images only!");
   }
 }
-
+//middleware upload
 const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
@@ -35,7 +35,7 @@ const upload = multer({
 });
 
 router.post("/", upload.single("image"), (req, res) => {
-  res.send(`${req.file.path}`);
+  res.send(`/${req.file.path}`);
 });
 
 export default router;
