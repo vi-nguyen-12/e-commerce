@@ -17,7 +17,7 @@ export const productUpdateSlice = createSlice({
   name: "productUpdate",
   initialState: {},
   reducers: {
-    resetUpdate: (state) => (state = {}),
+    resetUpdate: () => ({}),
   },
   extraReducers: {
     [updateProduct.fulfilled]: (state, { payload }) => {
@@ -49,7 +49,7 @@ export const productCreateSlice = createSlice({
   name: "productCreate",
   initialState: {},
   reducers: {
-    resetProduct: () => {},
+    resetCreate: () => ({}),
   },
   extraReducers: {
     [createProduct.fulfilled]: (state, { payload }) => {
@@ -62,7 +62,7 @@ export const productCreateSlice = createSlice({
     },
   },
 });
-export const { resetProduct } = productCreateSlice.actions;
+export const { resetCreate } = productCreateSlice.actions;
 
 // delete product
 export const deleteProduct = createAsyncThunk(
@@ -79,6 +79,9 @@ export const deleteProduct = createAsyncThunk(
 export const productDeleteSlice = createSlice({
   name: "productDelete",
   initialState: {},
+  reducers: {
+    resetDelete: () => ({}),
+  },
   extraReducers: {
     [deleteProduct.fulfilled]: (state, { payload }) => {
       if ("response" in payload) {
@@ -89,6 +92,7 @@ export const productDeleteSlice = createSlice({
     },
   },
 });
+export const { resetDelete } = productDeleteSlice.actions;
 
 //productList
 export const getProductList = createAsyncThunk(

@@ -11,8 +11,9 @@ import { userLoginSelector } from "../../selector/userSelector";
 import {
   getProductList,
   deleteProduct,
+  resetDelete,
   createProduct,
-  resetProduct,
+  resetCreate,
 } from "../../slice/productSlice";
 import { Wrapper } from "./styled";
 import { Message, Header, Button, Table, Container } from "semantic-ui-react";
@@ -33,7 +34,12 @@ const ProductListScreen = () => {
 
   const history = useHistory();
   useEffect(() => {
-    dispatch(resetProduct());
+    if (successDelete) {
+      dispatch(resetDelete());
+    }
+    if (successCreate) {
+      dispatch(resetCreate());
+    }
     if (userInfo && userInfo.isAdmin) {
       dispatch(getProductList());
     } else {
