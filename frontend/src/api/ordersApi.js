@@ -16,4 +16,7 @@ export const ordersApi = {
   listOrders: () => {
     return axiosClient.get("/api/orders");
   },
+  deliverOrder: (id) => {
+    return axiosClient.put(`api/orders/${id}/deliver`);
+  },
 };
