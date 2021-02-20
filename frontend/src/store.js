@@ -23,6 +23,7 @@ import {
   orderPaySlice,
   myOrderListSlice,
   orderListSlice,
+  orderDeliveredSlice,
 } from "./slice/orderSlice";
 
 const store = configureStore({
@@ -48,6 +49,7 @@ const store = configureStore({
     orderPay: orderPaySlice.reducer,
     myOrderList: myOrderListSlice.reducer,
     orderList: orderListSlice.reducer,
+    orderDelivered: orderDeliveredSlice.reducer,
   },
 });
 

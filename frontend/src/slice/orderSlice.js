@@ -164,3 +164,39 @@ export const orderListSlice = createSlice({
     },
   },
 });
+
+//update order to deliver
+export const deliverOrder = createAsyncThunk(
+  "orders/deliverOrder",
+  async (id) => {
+    try {
+      const response = await ordersApi.deliverOrder(id);
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+export const orderDeliveredSlice = createSlice({
+  name: "orderDelivered",
+  initialState: {},
+  reducer: {
+    resetDeliveredOrder: (state, _) => {
+      state = {};
+    },
+  },
+  extraReducers: {
+    [deliverOrder.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+export const { resetDeliveredOrder } = orderDeliveredSlice.actions;
