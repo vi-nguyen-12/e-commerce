@@ -17,6 +17,6 @@ export const ordersApi = {
     return axiosClient.get("/api/orders");
   },
   deliverOrder: (id) => {
-    return axiosClient.put(`api/orders/${id}/deliver`);
+    return axiosClient.put(`/api/orders/${id}/deliver`);
   },
 };
