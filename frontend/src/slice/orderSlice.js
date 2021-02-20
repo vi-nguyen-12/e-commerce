@@ -184,11 +184,7 @@ export const deliverOrder = createAsyncThunk(
 export const orderDeliveredSlice = createSlice({
   name: "orderDelivered",
   initialState: {},
-  reducer: {
-    resetDeliveredOrder: (state, _) => {
-      state = {};
-    },
-  },
+  reducer: {},
   extraReducers: {
     [deliverOrder.fulfilled]: (state, { payload }) => {
       if ("response" in payload) {
@@ -199,4 +195,3 @@ export const orderDeliveredSlice = createSlice({
     },
   },
 });
-export const { resetDeliveredOrder } = orderDeliveredSlice.actions;

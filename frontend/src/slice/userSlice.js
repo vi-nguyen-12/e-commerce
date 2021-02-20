@@ -52,7 +52,7 @@ export const userLoginSlice = createSlice({
   initialState: { userInfo: userInfoFromStorage },
   reducers: {
     logout: (state) => {
-      state.userInfo = null;
+      state.userInfo = {};
       localStorage.removeItem("userInfo");
     },
   },
