@@ -99,6 +99,7 @@ export const orderPaySlice = createSlice({
     },
   },
 });
+export const { resetPayOrder } = orderPaySlice.actions;
 
 //get my order list
 export const listMyOrders = createAsyncThunk(
@@ -134,4 +135,32 @@ export const myOrderListSlice = createSlice({
     },
   },
 });
-export const { resetPayOrder, resetMyOrderList } = orderPaySlice.actions;
+
+//get order list
+export const listOrders = createAsyncThunk("orders/listOrders", async () => {
+  try {
+    const response = await ordersApi.listOrders();
+    return { response };
+  } catch (err) {
+    const error =
+      err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message;
+    return { error };
+  }
+});
+export const orderListSlice = createSlice({
+  name: "orderListSlice",
+  initialState: { orders: [] },
+  extraReducers: {
+    [listOrders.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.orders = payload.response;
+        state.loading = false;
+      } else {
+        state.error = payload.error;
+        state.loading = false;
+      }
+    },
+  },
+});

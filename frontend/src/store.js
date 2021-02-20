@@ -22,6 +22,7 @@ import {
   orderDetailsSlice,
   orderPaySlice,
   myOrderListSlice,
+  orderListSlice,
 } from "./slice/orderSlice";
 
 const store = configureStore({
@@ -38,14 +39,15 @@ const store = configureStore({
     userRegister: userRegisterSlice.reducer,
     userDetails: userDetailsSlice.reducer,
     userUpdateProfile: userUpdateProfileSlice.reducer,
+    userList: userListSlice.reducer,
+    userDelete: userDeleteSlice.reducer,
+    userUpdate: userUpdateSlice.reducer,
 
     orderCreate: orderCreateSlice.reducer,
     orderDetails: orderDetailsSlice.reducer,
     orderPay: orderPaySlice.reducer,
     myOrderList: myOrderListSlice.reducer,
-    userList: userListSlice.reducer,
-    userDelete: userDeleteSlice.reducer,
-    userUpdate: userUpdateSlice.reducer,
+    orderList: orderListSlice.reducer,
   },
 });
 

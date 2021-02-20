@@ -15,3 +15,7 @@ export const myOrderListSelector = createSelector(
   ({ myOrderList }) => myOrderList,
   (myOrderList) => myOrderList
 );
+export const orderListSelector = createSelector(
+  ({ orderList }) => orderList,
+  (orderList) => orderList
+);
