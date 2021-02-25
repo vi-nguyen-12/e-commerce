@@ -15,4 +15,8 @@ export const productsApi = {
   updateProduct: (product) => {
     return axiosClient.put(`/api/products/${product._id}`, product);
   },
+  createProductReview: (data) => {
+    const { id, rating, comment } = data;
+    return axiosClient.post(`/api/products/${id}/reviews`, { rating, comment });
+  },
 };
