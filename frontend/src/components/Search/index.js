@@ -10,7 +10,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const handleSubmit = () => {
     dispatch(getProductList(keyword));
-    setKeyword = "";
+    setKeyword("");
   };
   return (
     <Wrapper>
