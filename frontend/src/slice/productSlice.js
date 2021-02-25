@@ -97,8 +97,8 @@ export const { resetDelete } = productDeleteSlice.actions;
 //productList
 export const getProductList = createAsyncThunk(
   "products/getProductList",
-  async () => {
-    const res = await productsApi.getProducts();
+  async (keyword) => {
+    const res = await productsApi.getProducts(keyword);
     return res;
   }
 );
