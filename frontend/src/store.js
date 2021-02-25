@@ -5,6 +5,7 @@ import {
   productDeleteSlice,
   productCreateSlice,
   productUpdateSlice,
+  productReviewCreateSlice,
 } from "./slice/productSlice";
 import { cartSlice } from "./slice/cartSlice";
 import { loadingSlice } from "./slice/loadingSlice";
@@ -50,6 +51,7 @@ const store = configureStore({
     myOrderList: myOrderListSlice.reducer,
     orderList: orderListSlice.reducer,
     orderDelivered: orderDeliveredSlice.reducer,
+    productReviewCreate: productReviewCreateSlice.reducer,
   },
 });
 
