@@ -135,3 +135,36 @@ export const productDetailSlice = createSlice({
     },
   },
 });
+//productReviewCreate
+export const createProductReview = createAsyncThunk(
+  "products/createProductReview",
+  async (data) => {
+    try {
+      const response = await productsApi.createProductReview(data);
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+export const productReviewCreateSlice = createSlice({
+  name: "productReviewCreate",
+  initialState: {},
+  reducers: {
+    resetReviewCreate: () => ({}),
+  },
+  extraReducers: {
+    [createProductReview.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+export const { resetReviewCreate } = productReviewCreateSlice.actions;
