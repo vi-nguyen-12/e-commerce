@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu, Header, Dropdown } from "semantic-ui-react";
+import Search from "../Search";
 import { useDispatch, useSelector } from "react-redux";
 import { Wrapper } from "./styled";
 import { useHistory } from "react-router-dom";
@@ -19,10 +20,12 @@ const Heading = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    history.push("/");
   };
   return (
     <Wrapper>
       <Header onClick={handleClick("")}>PROSHOP</Header>
+      <Search />
       <Menu secondary>
         <Menu.Item>{/* <Search /> */}</Menu.Item>
         <Menu.Menu position="right">
