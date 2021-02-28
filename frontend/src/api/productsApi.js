@@ -1,10 +1,9 @@
 import axiosClient from "./axiosClient";
 export const productsApi = {
-  getProducts: (keyword) => {
-    if (keyword) {
-      return axiosClient.get(`/api/products?keyword=${keyword}`);
-    }
-    return axiosClient.get("/api/products");
+  getProducts: (keyword, pageNumber) => {
+    return axiosClient.get(
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+    );
   },
   getProduct: (id) => {
     return axiosClient.get(`/api/products/${id}`);
