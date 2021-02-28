@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Header, Grid, Message } from "semantic-ui-react";
 import { Wrapper } from "./styled";
-import { Product } from "../../components";
+import { Product, Paginate } from "../../components";
 import { productListSelector } from "../../selector/productSelector";
 import { getProductList } from "../../slice/productSlice";
 
 const HomeScreen = () => {
-  const { products, error } = useSelector(productListSelector);
+  const { products, error, page, pages } = useSelector(productListSelector);
   const dispatch = useDispatch();
+
+  const { keyword, pageNumber } = useParams();
+
   useEffect(() => {
-    dispatch(getProductList());
-  }, [dispatch]);
+    console.log(pageNumber);
+    dispatch(getProductList({ keyword, pageNumber }));
+  }, [dispatch, keyword, pageNumber]);
 
   if (error) return <Message error header={error} />;
   return (
@@ -26,6 +31,7 @@ const HomeScreen = () => {
           ))}
         </Grid.Row>
       </Grid>
+      <Paginate page={page} pages={pages} keyword={keyword} />
     </Wrapper>
   );
 };
