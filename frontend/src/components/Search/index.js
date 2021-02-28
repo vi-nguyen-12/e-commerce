@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Form, Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+import { Form } from "semantic-ui-react";
 import { Wrapper } from "./styled";
-import { getProductList } from "../../slice/productSlice";
-import { get } from "mongoose";
 
 const Search = () => {
   const [keyword, setKeyword] = useState("");
-  const dispatch = useDispatch();
+  const history = useHistory();
   const handleSubmit = () => {
-    dispatch(getProductList(keyword));
-    setKeyword("");
+    if (keyword.trim()) {
+      history.push(`/search/${keyword}`);
+    } else {
+      history.push("/");
+    }
   };
   return (
     <Wrapper>
