@@ -97,8 +97,9 @@ export const { resetDelete } = productDeleteSlice.actions;
 //productList
 export const getProductList = createAsyncThunk(
   "products/getProductList",
-  async (keyword) => {
-    const res = await productsApi.getProducts(keyword);
+  async ({ keyword = "", pageNumber = "" }) => {
+    const res = await productsApi.getProducts(keyword, pageNumber);
+    console.log(res);
     return res;
   }
 );
@@ -107,7 +108,9 @@ export const productListSlice = createSlice({
   initialState: { products: [] },
   extraReducers: {
     [getProductList.fulfilled]: (state, { payload }) => {
-      state.products = payload;
+      state.products = payload.products;
+      state.page = payload.page;
+      state.pages = payload.pages;
     },
   },
 });
