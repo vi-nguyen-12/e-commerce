@@ -17,7 +17,7 @@ const getProducts = asyncHandler(async (req, res) => {
   //pagination
   const pageSize = 4;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.count({ ...keyword }); //count number of products that match keyword
+  const count = await Product.countDocuments({ ...keyword }); //count number of products that match keyword
   const pages = Math.ceil(count / pageSize);
   const products = await Product.find({ ...keyword })
     .limit(pageSize)
