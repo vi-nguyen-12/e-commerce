@@ -21,4 +21,7 @@ export const productsApi = {
     const { id, rating, comment } = data;
     return axiosClient.post(`/api/products/${id}/reviews`, { rating, comment });
   },
+  getTopProducts: () => {
+    return axiosClient.get("/api/products/top");
+  },
 };
