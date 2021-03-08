@@ -99,7 +99,6 @@ export const getProductList = createAsyncThunk(
   "products/getProductList",
   async ({ keyword = "", pageNumber = "" }) => {
     const res = await productsApi.getProducts(keyword, pageNumber);
-    console.log(res);
     return res;
   }
 );
@@ -138,6 +137,7 @@ export const productDetailSlice = createSlice({
     },
   },
 });
+
 //productReviewCreate
 export const createProductReview = createAsyncThunk(
   "products/createProductReview",
@@ -171,3 +171,34 @@ export const productReviewCreateSlice = createSlice({
   },
 });
 export const { resetReviewCreate } = productReviewCreateSlice.actions;
+
+//topProducts
+export const getTopProducts = createAsyncThunk(
+  "products/getTopProducts",
+  async () => {
+    try {
+      const response = await productsApi.getTopProducts();
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+
+export const topProductsSlice = createSlice({
+  name: "topProducts",
+  initialState: { products: [] },
+  extraReducers: {
+    [getTopProducts.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.products = payload.response;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
