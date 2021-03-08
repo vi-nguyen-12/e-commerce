@@ -15,4 +15,10 @@ export const usersApi = {
   listUsers: () => {
     return axiosClient.get("/api/users");
   },
+  deleteUser: (id) => {
+    return axiosClient.delete(`/api/users/${id}`);
+  },
+  updateUser: (user) => {
+    return axiosClient.put(`/api/users/${user._id}`, user);
+  },
 };

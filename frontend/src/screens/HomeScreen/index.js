@@ -1,35 +1,40 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Header, Grid, Message} from 'semantic-ui-react'
-import { Wrapper} from "./styled";
-import {Product} from '../../components'
-import {productListSelector} from '../../selector/productSelector';
-import {getProductList} from '../../slice/productSlice'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Header, Grid, Message } from "semantic-ui-react";
+import { Wrapper } from "./styled";
+import { Product, Paginate, ProductCarousel, Meta } from "../../components";
+import { productListSelector } from "../../selector/productSelector";
+import { getProductList } from "../../slice/productSlice";
 
 const HomeScreen = () => {
-    const {products,error}=useSelector(productListSelector);
-    console.log(products);
-    const dispatch=useDispatch();
-    useEffect(()=>{
-       dispatch(getProductList());
-    },[dispatch])
+  const { products, error, page, pages } = useSelector(productListSelector);
+  const dispatch = useDispatch();
 
+  const { keyword, pageNumber } = useParams();
 
-    if(error) return <Message error header={error}/>
-    return (
-            <Wrapper>
-                <Header> LATEST PRODUCTS </Header>
-                <Grid columns={4}>
-                    <Grid.Row>
-                        {products.map((product,idx)=>(
-                            <Grid.Column key={idx}>
-                                <Product product={product}/>
-                            </Grid.Column>
-                        ))}
-                    </Grid.Row>
-                </Grid>
-            </Wrapper>
-    )
-}
+  useEffect(() => {
+    dispatch(getProductList({ keyword, pageNumber }));
+  }, [dispatch, keyword, pageNumber]);
 
-export default HomeScreen
+  if (error) return <Message error header={error} />;
+  return (
+    <Wrapper>
+      <Meta />
+      {!keyword && <ProductCarousel />}
+      <Header> LATEST PRODUCTS </Header>
+      <Grid columns={4}>
+        <Grid.Row>
+          {products.map((product, idx) => (
+            <Grid.Column key={idx}>
+              <Product product={product} />
+            </Grid.Column>
+          ))}
+        </Grid.Row>
+      </Grid>
+      <Paginate page={page} pages={pages} keyword={keyword} />
+    </Wrapper>
+  );
+};
+
+export default HomeScreen;
