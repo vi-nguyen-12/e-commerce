@@ -29,3 +29,8 @@ export const productReviewCreateSelector = createSelector(
   ({ productReviewCreate }) => productReviewCreate,
   (productReviewCreate) => productReviewCreate
 );
+
+export const topProductsSelector = createSelector(
+  ({ topProducts }) => topProducts,
+  (topProducts) => topProducts
+);
