@@ -9,18 +9,22 @@ import {
   Image,
   Menu,
   Message,
+  Button,
 } from "semantic-ui-react";
 import { Loading } from "../../components";
 import { Wrapper } from "./styled";
 import {
   orderDetailsSelector,
   orderPaySelector,
+  orderDeliveredSelector,
 } from "../../selector/orderSelector";
 import {
   getOrderDetails,
   resetPayOrder,
   payOrder,
+  deliverOrder,
 } from "../../slice/orderSlice";
+import { userLoginSelector } from "../../selector/userSelector";
 import { PayPalButton } from "react-paypal-button-v2";
 import axios from "axios";
 
@@ -29,6 +33,8 @@ const OrderScreen = () => {
   const { loading: loadingPay, success: successPay } = useSelector(
     orderPaySelector
   );
+  const { success: successDelivered } = useSelector(orderDeliveredSelector);
+  const { userInfo } = useSelector(userLoginSelector);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -43,27 +49,35 @@ const OrderScreen = () => {
     dispatch(payOrder({ id, paymentResult }));
   };
 
+  const handleDeliver = () => {
+    console.log("test");
+    dispatch(deliverOrder(id));
+  };
+
   useEffect(() => {
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.onload = setSdkReady(true);
-      document.body.appendChild(script);
-    };
-    if (!order || successPay || order._id !== id) {
-      // dispatch(resetPayOrder());
-      dispatch(getOrderDetails(id));
-    } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPayPalScript();
-      } else {
-        setSdkReady(true);
+    if (!userInfo) {
+      history.push("/login");
+    } else {
+      const addPayPalScript = async () => {
+        const { data: clientId } = await axios.get("/api/config/paypal");
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+        script.onload = setSdkReady(true);
+        document.body.appendChild(script);
+      };
+      if (!order || successPay || successDelivered || order._id !== id) {
+        // dispatch(resetPayOrder());
+        dispatch(getOrderDetails(id));
+      } else if (!order.isPaid) {
+        if (!window.paypal) {
+          addPayPalScript();
+        } else {
+          setSdkReady(true);
+        }
       }
     }
-    console.log("test");
-  }, [dispatch, order, id, successPay]);
+  }, [dispatch, order, id, successPay, successDelivered]);
 
   if (loading) return <Loading />;
   if (error) return <Message error header={error} />;
@@ -167,6 +181,11 @@ const OrderScreen = () => {
                 />
               )}
             </>
+          )}
+          {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+            <Menu.Item>
+              <Button onClick={handleDeliver}>MARK AS DELIVERED</Button>
+            </Menu.Item>
           )}
         </Menu>
       </Container>

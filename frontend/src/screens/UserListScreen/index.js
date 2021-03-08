@@ -5,8 +5,9 @@ import { Grid } from "semantic-ui-react";
 import {
   userListSelector,
   userLoginSelector,
+  userDeleteSelector,
 } from "../../selector/userSelector";
-import { listUsers } from "../../slice/userSlice";
+import { listUsers, deleteUser } from "../../slice/userSlice";
 import { Wrapper } from "./styled";
 import { Message, Header, Form, Button, Table } from "semantic-ui-react";
 import { FiEdit } from "react-icons/fi";
@@ -17,6 +18,7 @@ const UserListScreen = () => {
   const dispatch = useDispatch();
   const { users, error } = useSelector(userListSelector);
   const { userInfo } = useSelector(userLoginSelector);
+  const { success: successDelete } = useSelector(userDeleteSelector);
 
   const history = useHistory();
   useEffect(() => {
@@ -25,8 +27,13 @@ const UserListScreen = () => {
     } else {
       history.push("/login");
     }
-  }, [dispatch]);
+  }, [dispatch, history, successDelete, userInfo]);
 
+  const handleDelete = (id) => () => {
+    if (window.confirm("Are you sure? ")) {
+      dispatch(deleteUser(id));
+    }
+  };
   if (error) return <Message negative content={error} />;
   return (
     <Wrapper>
@@ -58,11 +65,16 @@ const UserListScreen = () => {
                     )}
                   </Table.Cell>
                   <Table.Cell>
-                    <Button size="small">
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        history.push(`/admin/user/${user._id}/edit`);
+                      }}
+                    >
                       {" "}
                       <FiEdit />
                     </Button>
-                    <Button size="small">
+                    <Button size="small" onClick={handleDelete(user._id)}>
                       {" "}
                       <RiDeleteBin6Line color="red" />
                     </Button>

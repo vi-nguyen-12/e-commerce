@@ -58,7 +58,6 @@ export const userLoginSlice = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       if ("response" in payload) {
         state.userInfo = payload.response;
       } else {
@@ -96,7 +95,6 @@ export const userDetailsSlice = createSlice({
   initialState: { user: {} },
   extraReducers: {
     [getUserDetails.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       if ("response" in payload) {
         state.user = payload.response;
       } else {
@@ -170,3 +168,65 @@ export const userListSlice = createSlice({
     },
   },
 });
+
+// delete user
+export const deleteUser = createAsyncThunk("users/deleteUser", async (id) => {
+  try {
+    const response = await usersApi.deleteUser(id);
+    return { response };
+  } catch (err) {
+    const error =
+      err.response && err.response.data.message
+        ? err.response.data.message
+        : err.message;
+    return { error };
+  }
+});
+export const userDeleteSlice = createSlice({
+  name: "userDelete",
+  initialState: {},
+  extraReducers: {
+    [deleteUser.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+
+// update user
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async (user, { dispatch }) => {
+    try {
+      const response = await usersApi.updateUser(user);
+      dispatch(getUserDetails(user._id));
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+export const userUpdateSlice = createSlice({
+  name: "userUpdate",
+  initialState: {},
+  reducers: {
+    resetUpdate: (state) => (state = {}),
+  },
+  extraReducers: {
+    [updateUser.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+export const { resetUpdate } = userUpdateSlice.actions;

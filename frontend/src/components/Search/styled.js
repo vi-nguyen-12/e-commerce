@@ -3,16 +3,19 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   width: 350px;
   margin: 0 auto;
-  .ui.header {
-    font-weight: 350;
-    margin: 15px 0;
+  display: flex;
+  align-items: center;
+  .ui.form {
+    display: flex;
+    align-items: center;
+    & .field {
+      margin: 0;
+    }
   }
   .ui.button {
+    margin-left: 5px;
     background-color: black;
     color: white;
-  }
-  .ui.container {
-    margin: 0 !important;
-    padding: 10px 0;
+    font-size: 0.85rem;
   }
 `;
