@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Header, Grid, Message } from "semantic-ui-react";
 import { Wrapper } from "./styled";
-import { Product, Paginate } from "../../components";
+import { Product, Paginate, ProductCarousel, Meta } from "../../components";
 import { productListSelector } from "../../selector/productSelector";
 import { getProductList } from "../../slice/productSlice";
 
@@ -14,13 +14,14 @@ const HomeScreen = () => {
   const { keyword, pageNumber } = useParams();
 
   useEffect(() => {
-    console.log(pageNumber);
     dispatch(getProductList({ keyword, pageNumber }));
   }, [dispatch, keyword, pageNumber]);
 
   if (error) return <Message error header={error} />;
   return (
     <Wrapper>
+      <Meta />
+      {!keyword && <ProductCarousel />}
       <Header> LATEST PRODUCTS </Header>
       <Grid columns={4}>
         <Grid.Row>
