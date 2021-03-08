@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import morgan from "morgan";
