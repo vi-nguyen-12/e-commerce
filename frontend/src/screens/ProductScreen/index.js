@@ -27,6 +27,7 @@ import {
   TextArea,
 } from "semantic-ui-react";
 // import {Loading} from '../../components'
+import { Meta } from "../../components";
 import { Wrapper } from "./styled";
 import Rating from "../../components/Rating";
 
@@ -84,6 +85,7 @@ const ProductScreen = () => {
 
   return (
     <Wrapper>
+      <Meta title={product.name} />
       <Grid columns={4}>
         <Grid.Row>
           <Button onClick={handleClick}>GO BACK</Button>
