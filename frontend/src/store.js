@@ -6,6 +6,7 @@ import {
   productCreateSlice,
   productUpdateSlice,
   productReviewCreateSlice,
+  topProductsSlice,
 } from "./slice/productSlice";
 import { cartSlice } from "./slice/cartSlice";
 import { loadingSlice } from "./slice/loadingSlice";
@@ -52,6 +53,7 @@ const store = configureStore({
     orderList: orderListSlice.reducer,
     orderDelivered: orderDeliveredSlice.reducer,
     productReviewCreate: productReviewCreateSlice.reducer,
+    topProducts: topProductsSlice.reducer,
   },
 });
 
