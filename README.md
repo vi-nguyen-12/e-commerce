@@ -61,13 +61,13 @@ https://user-images.githubusercontent.com/67376402/116802245-05630c80-aad7-11eb-
 ## How to use
 - Clone the repo (folder named E-commerce):
 
-##### `git clone https://github.com/chloe-nguyen-12/e-commerce.git`
+        ##### `git clone https://github.com/chloe-nguyen-12/e-commerce.git`
 
 - Install npm packages in main 'E-commerce' and 'frontend' folder:
 
-##### `npm install npm@latest`
+        ##### `npm install npm@latest`
     
 - Run both server and client:
 
-##### `npm run dev`
+        ##### `npm run dev`
     
