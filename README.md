@@ -20,6 +20,8 @@ App is availale live at: https://proshopapp1231.herokuapp.com/
 
 https://user-images.githubusercontent.com/67376402/116802226-e5cbe400-aad6-11eb-9bfe-0b87c4b2acff.mov
 
+
+
 ### Demo 2:
 - Sign-up/ Login/ Logout 
 - User Profile with Orders
@@ -29,12 +31,16 @@ https://user-images.githubusercontent.com/67376402/116802234-f2e8d300-aad6-11eb-
 
 
 
+
+
 ### Demo 3:
 - Full featured shopping cart
 - Checkout process (shipping, payment method, etc)
 - PayPal payment
 
 https://user-images.githubusercontent.com/67376402/116802240-fd0ad180-aad6-11eb-8f50-8336fec6f892.mov
+
+
 
 
 
@@ -52,8 +58,8 @@ https://user-images.githubusercontent.com/67376402/116802245-05630c80-aad7-11eb-
 
 ## How to use
 - Clone the repo (folder named E-commerce):
-    git clone https://github.com/chloe-nguyen-12/e-commerce.git
+    -git clone https://github.com/chloe-nguyen-12/e-commerce.git
 - Install npm packages in main 'E-commerce' and 'frontend' folder:
-    npm install npm@latest
+    -npm install npm@latest
 - Run both server and client:
-    npm run dev
+    -npm run dev
