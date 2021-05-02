@@ -22,14 +22,16 @@ https://user-images.githubusercontent.com/67376402/116802226-e5cbe400-aad6-11eb-
 
 \
 \
+\
 
 ### Demo 2:
 - Sign-up/ Login/ Logout 
 - User Profile with Orders
-- Update User Profile.\
+- Update User Profile\
 
 https://user-images.githubusercontent.com/67376402/116802234-f2e8d300-aad6-11eb-9975-f717986d1f3f.mov
 
+\
 \
 \
 ### Demo 3:
@@ -41,18 +43,20 @@ https://user-images.githubusercontent.com/67376402/116802240-fd0ad180-aad6-11eb-
 
 \
 \
+\
 ### Demo4:
-- Log in as admin.\
+- Log in as admin:\
 Email: admin@example.com\
 Password: 123456
-- Admin user management_
+- Admin user management
 - Admin product management: create/delete products
 - Admin order details page
 - Mark orders as delivered
 
 https://user-images.githubusercontent.com/67376402/116802245-05630c80-aad7-11eb-93fd-b6f27af9dcee.mov
 
-\_
+\
+\
 \
 ## How to use
 - Clone the repo (folder named E-commerce):
