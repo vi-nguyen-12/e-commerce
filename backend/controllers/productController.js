@@ -5,25 +5,31 @@ import Product from "../models/productModel.js";
 //@route    GET /api/products or /api/products/?keyword=...
 //@access   public
 const getProducts = asyncHandler(async (req, res) => {
-  //if has query, then match keyword to the name of product
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-    : {};
-  //pagination
-  const pageSize = 4;
-  const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments({ ...keyword }); //count number of products that match keyword
-  const pages = Math.ceil(count / pageSize);
-  const products = await Product.find({ ...keyword })
-    .limit(pageSize)
-    .skip(pageSize * (page - 1));
+  if (req.query.pageNumber === "all") {
+    const products = await Product.find();
+    console.log(products);
+    res.json({ products });
+  } else {
+    //if has query, then match keyword to the name of product
+    const keyword = req.query.keyword
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+    //pagination
+    const pageSize = 4;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Product.countDocuments({ ...keyword }); //count number of products that match keyword
+    const pages = Math.ceil(count / pageSize);
+    const products = await Product.find({ ...keyword })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
 
-  res.json({ products, page, pages });
+    res.json({ products, page, pages });
+  }
 });
 
 //@desc     Fetch single product
@@ -153,7 +159,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 //@route    GET /api/products/top
 //@access   public
 const getTopProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  const products = await Product.find().sort({ rating: -1 }).limit(3);
   res.json(products);
 });
 

@@ -41,7 +41,7 @@ const ProductListScreen = () => {
       dispatch(resetCreate());
     }
     if (userInfo && userInfo.isAdmin) {
-      dispatch(getProductList());
+      dispatch(getProductList({ pageNumber: "all" }));
     } else {
       history.push("/login");
     }

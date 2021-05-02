@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Header, Grid, Message } from "semantic-ui-react";
 import { Wrapper } from "./styled";
 import { Product, Paginate, ProductCarousel, Meta } from "../../components";
@@ -27,7 +27,9 @@ const HomeScreen = () => {
         <Grid.Row>
           {products.map((product, idx) => (
             <Grid.Column key={idx}>
+              {/* <Link to={}> */}
               <Product product={product} />
+              {/* </Link> */}
             </Grid.Column>
           ))}
         </Grid.Row>

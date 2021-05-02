@@ -36,11 +36,14 @@ const ProfileScreen = () => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user.name) {
+      if (
+        !user.name ||
+        user.name !== userInfo.name ||
+        user.email !== userInfo.email
+      ) {
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
-        console.log(state);
         setState({
           ...state,
           name: user.name,
@@ -48,7 +51,7 @@ const ProfileScreen = () => {
         });
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, message, error, success]);
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });

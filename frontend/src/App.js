@@ -17,7 +17,12 @@ import {
   ProductEditScreen,
   OrderListScreen,
 } from "./screens";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
 
 const App = () => {

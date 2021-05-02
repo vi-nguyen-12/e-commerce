@@ -29,6 +29,38 @@ export const userRegisterSlice = createSlice({
   },
 });
 
+// update profile
+export const updateUserProfile = createAsyncThunk(
+  "users/updateUserProfile",
+  async (user) => {
+    try {
+      const response = await usersApi.updateProfile(user);
+      return { response };
+    } catch (err) {
+      const error =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return { error };
+    }
+  }
+);
+export const userUpdateProfileSlice = createSlice({
+  name: "userUpdateProfile",
+  initialState: { userInfo: {} },
+  extraReducers: {
+    [updateUserProfile.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+      if ("response" in payload) {
+        state.userInfo = payload.response;
+        state.success = true;
+      } else {
+        state.error = payload.error;
+      }
+    },
+  },
+});
+
 //login logout
 export const login = createAsyncThunk("users/login", async (data) => {
   try {
@@ -69,6 +101,11 @@ export const userLoginSlice = createSlice({
         state.userInfo = payload.response;
       }
     },
+    [updateUserProfile.fulfilled]: (state, { payload }) => {
+      if ("response" in payload) {
+        state.userInfo = payload.response;
+      }
+    },
   },
 });
 
@@ -103,38 +140,6 @@ export const userDetailsSlice = createSlice({
     },
     [logout]: (state) => {
       state.user = {};
-    },
-  },
-});
-
-// update profile
-export const updateUserProfile = createAsyncThunk(
-  "users/updateUserProfile",
-  async (user) => {
-    try {
-      const response = await usersApi.updateProfile(user);
-      return { response };
-    } catch (err) {
-      const error =
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : err.message;
-      return { error };
-    }
-  }
-);
-export const userUpdateProfileSlice = createSlice({
-  name: "userUpdateProfile",
-  initialState: { userInfo: {} },
-  extraReducers: {
-    [updateUserProfile.fulfilled]: (state, { payload }) => {
-      console.log(payload);
-      if ("response" in payload) {
-        state.userInfo = payload.response;
-        state.success = true;
-      } else {
-        state.error = payload.error;
-      }
     },
   },
 });
