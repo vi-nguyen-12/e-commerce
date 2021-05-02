@@ -10,23 +10,23 @@
 - Bcrypt
 
 ## Features
-Demo 1:
+### Demo 1:
 - Top products carousel
 - Product Pagination
 - Product Search
 - Product details, review and ratings
 
-Demo 2:
+### Demo 2:
 - Sign-up/ Login/ Logout 
 - User Profile with Orders
 - Update User Profile
 
-Demo 3:
+### Demo 3:
 - Full featured shopping cart
 - Checkout process (shipping, payment method, etc)
 - PayPal payment
 
-Demo4:
+### Demo4:
 - Log in as admin
 Email: admin@example.com
 Password: 123456
@@ -36,6 +36,9 @@ Password: 123456
 - Mark orders as delivered
 
 ## How to use
-- Clone the repo
-
-#### git clone https://github.com/chloe-nguyen-12/e-commerce.git
+- Clone the repo (folder named E-commerce):
+    git clone https://github.com/chloe-nguyen-12/e-commerce.git
+- Install npm packages in main 'E-commerce' and 'frontend' folder:
+    npm install npm@latest
+- Run both server and client:
+    npm run dev
