@@ -20,8 +20,8 @@ App is availale live at: https://proshopapp1231.herokuapp.com/
 
 https://user-images.githubusercontent.com/67376402/116802226-e5cbe400-aad6-11eb-9bfe-0b87c4b2acff.mov
 
-.\
-.\
+\
+\
 
 ### Demo 2:
 - Sign-up/ Login/ Logout 
@@ -30,10 +30,8 @@ https://user-images.githubusercontent.com/67376402/116802226-e5cbe400-aad6-11eb-
 
 https://user-images.githubusercontent.com/67376402/116802234-f2e8d300-aad6-11eb-9975-f717986d1f3f.mov
 
-
-
-
-
+\
+\
 ### Demo 3:
 - Full featured shopping cart
 - Checkout process (shipping, payment method, etc)
@@ -41,10 +39,8 @@ https://user-images.githubusercontent.com/67376402/116802234-f2e8d300-aad6-11eb-
 
 https://user-images.githubusercontent.com/67376402/116802240-fd0ad180-aad6-11eb-8f50-8336fec6f892.mov
 
-
-
-
-
+\
+\
 ### Demo4:
 - Log in as admin.\
 Email: admin@example.com.\
@@ -56,7 +52,8 @@ Password: 123456
 
 https://user-images.githubusercontent.com/67376402/116802245-05630c80-aad7-11eb-93fd-b6f27af9dcee.mov
 
-
+\
+\
 ## How to use
 - Clone the repo (folder named E-commerce): .\
 
