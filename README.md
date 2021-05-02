@@ -38,4 +38,4 @@ Password: 123456
 ## How to use
 - Clone the repo
 
-#### https://github.com/chloe-nguyen-12/e-commerce.git
+#### git clone https://github.com/chloe-nguyen-12/e-commerce.git
