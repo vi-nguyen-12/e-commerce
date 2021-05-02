@@ -8,12 +8,12 @@ const Product = ({product}) => {
 
     return (
         <Card>
-            <Link to={`product/${product._id}`}>
+            <Link to={`/product/${product._id}`}>
                 <Image src={product.image}/>
             </Link>
             
             <Card.Content>
-                <Link to={`product/${product._id}`}>
+                <Link to={`/product/${product._id}`}>
                     <Card.Header>{product.name}</Card.Header>
                 </Link>
                 <Card.Meta>
