@@ -9,3 +9,7 @@ enjoy!!
 
 email: admin@example.com
 password: 123456
+
+### live available at
+
+https://proshopapp1231.herokuapp.com/

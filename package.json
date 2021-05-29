@@ -11,17 +11,20 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
+    "test": "mocha backend/test --timeout 10000"
   },
   "author": "Chloe",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chai": "^4.3.4",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.4.0",
     "mongoose": "^5.11.10",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
